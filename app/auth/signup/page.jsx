@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import useFormStore from "@/app/store/useFormStore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FaUser, FaPhone, FaLock } from "react-icons/fa";
@@ -7,17 +7,27 @@ import { MdEmail } from "react-icons/md";
 
 const Page = () => {
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    investmentType: "Stocks",
-    password: "",
-    inputReferralCode: "",
-  });
+  const {
+    name,
+    email,
+    phone,
+    investmentType,
+    password,
+    inputReferralCode,
+    setFormData,
+  } = useFormStore();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const formData = {
+      name,
+      email,
+      phone,
+      investmentType,
+      password,
+      inputReferralCode,
+    };
 
     // Check if any required fields are empty
     if (
@@ -55,7 +65,9 @@ const Page = () => {
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    setFormData(name, value);
   };
 
   return (
@@ -71,7 +83,7 @@ const Page = () => {
           <input
             type="text"
             name="name"
-            value={formData.name}
+            value={name}
             onChange={handleChange}
             placeholder="Full Name"
             className="w-full h-auto p-3 border border-border rounded-md"
@@ -84,7 +96,7 @@ const Page = () => {
           <input
             type="email"
             name="email"
-            value={formData.email}
+            value={email}
             onChange={handleChange}
             placeholder="Email Address"
             className="w-full h-auto p-3 border border-border rounded-md"
@@ -97,7 +109,7 @@ const Page = () => {
           <input
             type="tel"
             name="phone"
-            value={formData.phone}
+            value={phone}
             onChange={handleChange}
             placeholder="Phone Number"
             className="w-full h-auto p-3 border border-border rounded-md"
@@ -106,7 +118,7 @@ const Page = () => {
 
         <select
           name="investmentType"
-          value={formData.investmentType}
+          value={investmentType}
           onChange={handleChange}
           className="w-9/12 h-auto p-3 border border-border rounded-md appearance-none"
           placeholder="Select Investment"
@@ -121,6 +133,15 @@ const Page = () => {
             <option className="text-copy" value="Real Estate">
               Real Estate
             </option>
+            <option className="text-copy" value="Gold Market">
+              Gold Market
+            </option>
+            <option className="text-copy" value="Cryptocurrency">
+              Cryptocurrency
+            </option>
+            <option className="text-copy" value="Forex">
+              Forex
+            </option>
           </optgroup>
         </select>
         <div className="w-9/12 h-auto mx-auto relative flex justify-center items-center">
@@ -130,7 +151,7 @@ const Page = () => {
           <input
             type="password"
             name="password"
-            value={formData.password}
+            value={password}
             onChange={handleChange}
             placeholder="Password"
             className="w-full h-auto p-3 border border-border rounded-md"
@@ -143,7 +164,7 @@ const Page = () => {
           <input
             type="text"
             name="inputReferralCode"
-            value={formData.inputReferralCode}
+            value={inputReferralCode}
             onChange={handleChange}
             placeholder="Referral Code"
             className="w-full h-auto p-3 border border-border rounded-md"
@@ -158,7 +179,7 @@ const Page = () => {
         </button>
         <p className="">
           Already have an account?
-          <Link href="/log-in" className="ml-2 text-primary-light">
+          <Link href="/auth/login" className="ml-2 text-primary-light">
             Login here
           </Link>
         </p>

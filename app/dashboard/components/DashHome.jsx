@@ -1,10 +1,15 @@
+"use client";
+import useFormStore from "@/app/store/useFormStore";
 import React from "react";
 
 const DashHome = () => {
+  // const userName = useFormStore((state) => state.formData.name);
+  const { name } = useFormStore();
+
   return (
     <main className="w-full h-full flex flex-col items-center justify-start gap-5">
       <section className="w-full h-full p-5 bg-white rounded-md drop-shadow-md">
-        <h1 className="text-xl font-bold text-copy-light">Welcome!</h1>
+        <h1 className="text-xl font-bold text-copy-light">Welcome, {name}!</h1>
       </section>
       <section className="w-full h-auto md:h-[500px] bg-white p-5 flex justify-center items-center gap-5 rounded-md drop-shadow-md">
         <div className="w-full h-full grid grid-cols-2 md:grid-cols-4 gap-5">

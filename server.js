@@ -17,6 +17,12 @@ app.post("/auth/signup", (req, res) => {
   res.json({ message: "Signup successful!" });
 });
 
+app.post("/auth/login", (req, res) => {
+  // Retrieve email and password from request body
+  const { email, password } = req.body;
+  res.json({ message: "Signup successful!" });
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
