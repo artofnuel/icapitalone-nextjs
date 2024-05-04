@@ -45,7 +45,7 @@ const Page = () => {
       const response = await fetch(
         // "http://localhost:3020/auth/signup" ||
         // "http://127.0.0.1:3020/auth/signup",
-        "https://icapitalone-nextjs.vercel.app/auth/signup",
+        "http://127.0.0.1:3020/auth/signup",
         {
           method: "POST",
           headers: {
