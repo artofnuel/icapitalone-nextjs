@@ -57,7 +57,7 @@ const page = () => {
           Login
         </button>
         <p className="flex flex-col md:flex-row justify-center items-center">
-          Don't have an account?
+          {`Don't have an account?`}
           <Link href="/sign-up" className="ml-2 text-primary-light">
             Create Account
           </Link>

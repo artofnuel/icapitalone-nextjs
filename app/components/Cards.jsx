@@ -11,7 +11,10 @@ const Cards = () => {
       </h5>
       <section className="w-full max-w-5xl mx-auto flex flex-col md:flex-row justify-center items-center gap-8 p-5">
         {cardData.map((item, index) => (
-          <button className="w-full md:w-1/2 h-[350px] flex flex-col text-left drop-shadow-lg">
+          <button
+            key={index}
+            className="w-full md:w-1/2 h-[350px] flex flex-col text-left drop-shadow-lg"
+          >
             <div className="w-full h-1/2">
               <Image
                 src={item.img}

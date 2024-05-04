@@ -9,7 +9,10 @@ const Services = () => {
     <main className="w-full h-auto relative overflow-hidden text-copy">
       <section className="w-full min-h-screen md:h-screen flex flex-col justify-center items-center">
         {servicesData.map((item, index) => (
-          <div className="w-full md:h-1/2 flex flex-col md:flex-row md:even:flex-row-reverse">
+          <div
+            key={index}
+            className="w-full md:h-1/2 flex flex-col md:flex-row md:even:flex-row-reverse"
+          >
             <div className="w-full md:w-1/2 h-full">
               <Image
                 src={item.img}
