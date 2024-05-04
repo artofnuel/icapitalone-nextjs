@@ -1,0 +1,194 @@
+{
+    "info": {
+        "_postman_id": "4362264d-4ca2-4a55-8b4c-9781cfd88c8a",
+        "name": "iCapitalOne",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "Auth",
+            "item": [
+                {
+                    "name": "Register",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "http://127.0.0.1:3020/auth/signup",
+                            "path": [
+                                "auth",
+                                "signup"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "127",
+                                "0",
+                                "0",
+                                "1"
+                            ],
+                            "port": "3020"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"name\": \"Josiah\",\n  \"email\": \"jessezephyr@gmail.com\",\n  \"phone\": \"08045273271\",\n  \"investmentType\": \"Stocks\",\n  \"password\": \"Yishai123$\",\n  \"inputReferralCode\": \"ref-JJ:663140d1928024de75c6926f\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "https://icapitalone.up.railway.app/auth/login",
+                            "path": [
+                                "auth",
+                                "login"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "icapitalone",
+                                "up",
+                                "railway",
+                                "app"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"email\": \"jessezephyr@gmail.com\",\n  \"password\": \"qwertyuiop\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Admin Register",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "http://127.0.0.1:3020/auth/admin/signup",
+                            "path": [
+                                "auth",
+                                "admin",
+                                "signup"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "127",
+                                "0",
+                                "0",
+                                "1"
+                            ],
+                            "port": "3020"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"name\": \"admin\",\n  \"email\": \"admin@gmail.com\",\n  \"password\": \"admin\",\n  \"secret\": \"424762ae27385d8f09ae6420e3661161a20ba16e4393c3df7bcc97aa6eb6fd43\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Forgot Password",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "http://127.0.0.1:3020/auth/forgot-password",
+                            "path": [
+                                "auth",
+                                "forgot-password"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "127",
+                                "0",
+                                "0",
+                                "1"
+                            ],
+                            "port": "3020"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"email\": \"jessezephyr@gmail.com\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Verify Reset Code",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "http://127.0.0.1:3020/auth/verify-reset-code",
+                            "path": [
+                                "auth",
+                                "verify-reset-code"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "127",
+                                "0",
+                                "0",
+                                "1"
+                            ],
+                            "port": "3020"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"verificationCode\": \"191926\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Change Password",
+                    "request": {
+                        "method": "PATCH",
+                        "url": {
+                            "raw": "https://icapitalone.up.railway.app/auth/change-password",
+                            "path": [
+                                "auth",
+                                "change-password"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "icapitalone",
+                                "up",
+                                "railway",
+                                "app"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"email\": \"jessezephyr@gmail.com\",\n  \"newPassword\": \"qwertyuiop\"\n}"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
