@@ -92,7 +92,7 @@ const Content = ({ selected, dir }) => {
         opacity: 0,
         y: 8,
       }}
-      className="absolute left-0 top-[calc(100%_+_24px)] w-96 rounded-lg border border-neutral-600 bg-copy p-4"
+      className="absolute left-0 top-[calc(100%_+_24px)] w-36 rounded-lg border border-neutral-600 bg-copy p-4"
     >
       <Bridge />
       <Nub selected={selected} />
@@ -165,13 +165,22 @@ const Products = () => {
         <div>
           <h3 className="mb-2 text-sm font-medium">Startup</h3>
           <a href="#" className="mb-1 block text-sm text-neutral-400">
-            Bookkeeping
+            Stocks
           </a>
           <a href="#" className="block text-sm text-neutral-400">
-            Invoicing
+            Bonds
+          </a>
+          <a href="#" className="block text-sm text-neutral-400">
+            Real Estate
+          </a>
+          <a href="#" className="block text-sm text-neutral-400">
+            Gold Market
+          </a>
+          <a href="#" className="block text-sm text-neutral-400">
+            Forex
           </a>
         </div>
-        <div>
+        {/* <div>
           <h3 className="mb-2 text-sm font-medium">Scaleup</h3>
           <a href="#" className="mb-1 block text-sm text-neutral-400">
             Live Coaching
@@ -197,7 +206,7 @@ const Products = () => {
           <a href="#" className="block text-sm text-neutral-400">
             More
           </a>
-        </div>
+        </div> */}
       </div>
 
       <button className="ml-auto mt-4 flex items-center gap-1 text-sm text-indigo-300">
@@ -282,8 +291,8 @@ const TABS = [
   //     title: "Pricing",
   //     Component: Pricing,
   //   },
-  {
-    title: "Blog",
-    Component: Blog,
-  },
+  // {
+  //   title: "Blog",
+  //   Component: Blog,
+  // },
 ].map((n, idx) => ({ ...n, id: idx + 1 }));
