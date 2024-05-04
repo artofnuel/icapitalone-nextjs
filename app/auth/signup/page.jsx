@@ -2,11 +2,14 @@
 import useFormStore from "@/app/store/useFormStore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FaUser, FaPhone, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { InfinitySpin } from "react-loader-spinner";
 
 const Page = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const {
     name,
     email,
@@ -15,10 +18,12 @@ const Page = () => {
     password,
     inputReferralCode,
     setFormData,
+    resetFormData,
   } = useFormStore();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const formData = {
       name,
@@ -38,17 +43,21 @@ const Page = () => {
       formData.inputReferralCode === ""
     ) {
       alert("Please fill in all required fields.");
+      setLoading(false);
       return; // Prevent form submission
     }
 
     try {
-      const response = await fetch("http://localhost:3020/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://icapitalone.up.railway.app/auth/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const responseData = await response.json();
 
@@ -56,11 +65,14 @@ const Page = () => {
         console.log("Signup successful!");
         console.log("Response data:", responseData);
         router.push("/dashboard");
+        resetFormData();
       } else {
         console.error("Error during signup:", responseData);
       }
     } catch (error) {
       console.error("Error during signup:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -173,9 +185,20 @@ const Page = () => {
 
         <button
           type="submit"
-          className="w-9/12 h-auto p-3 border-2 border-primary-light rounded-md text-primary-light hover:text-white hover:bg-primary-light transition-all duration-300 ease-in-out"
+          className="w-9/12 h-12 bg-primary-light flex flex-col justify-center items-center rounded-md text-white"
         >
-          Register
+          {loading ? (
+            <div className="pr-8">
+              <InfinitySpin
+                visible={true}
+                width="100"
+                color="#fff"
+                ariaLabel="infinity-spin-loading"
+              />
+            </div>
+          ) : (
+            "Register"
+          )}
         </button>
         <p className="">
           Already have an account?

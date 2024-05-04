@@ -1,30 +1,55 @@
 "use client";
 // In your login page component:
 import { useState } from "react";
-import { useRouter } from "next/navigation"; // Changed from next/navigation
+import { useRouter } from "next/navigation"; // Corrected import statement
 import Link from "next/link";
 import { FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import useFormStore from "@/app/store/useFormStore";
+import { InfinitySpin } from "react-loader-spinner";
 
 const LoginPage = () => {
   const router = useRouter();
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  // const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    const { email: storedEmail, password: storedPassword } =
-      useFormStore.getState();
+    try {
+      const response = await fetch(
+        "https://icapitalone.up.railway.app/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: userEmail, password: userPassword }),
+        }
+      );
 
-    if (userEmail === storedEmail && userPassword === storedPassword) {
-      console.log("Login successful!");
-      // Redirect to dashboard on successful login
-      router.push("/dashboard");
-    } else {
-      console.error("Error during login: Incorrect email or password");
-      alert("Login failed. Please check your email and password.");
+      if (!response.ok) {
+        throw new Error("Failed to authenticate");
+      }
+
+      const responseData = await response.json();
+
+      // Assuming the response contains a success flag and user data
+      if (responseData.success) {
+        console.log("Login successful!");
+        setLoading(false);
+        // Redirect to dashboard on successful login
+        router.push("/dashboard");
+      } else {
+        setLoading(false);
+        console.error("Error during login:", responseData.error);
+        alert("Login failed. Please check your email and password.");
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error("Error during login:", error.message);
+      alert("Login failed. Please try again later.");
     }
   };
 
@@ -63,14 +88,26 @@ const LoginPage = () => {
         </div>
         <button
           type="submit"
-          className="w-10/12 h-auto p-3 border-2 border-primary-light rounded-md text-primary-light hover:text-white hover:bg-primary-light transition-all duration-300 ease-in-out"
+          className={`w-10/12 h-12 bg-primary-light flex flex-col justify-center items-center rounded-md text-white`}
+          disabled={loading} // Disable button when loading
         >
-          Login
+          {loading ? (
+            <div className="pr-8">
+              <InfinitySpin
+                visible={true}
+                width="100"
+                color="#fff"
+                ariaLabel="infinity-spin-loading"
+              />
+            </div>
+          ) : (
+            "Login"
+          )}
         </button>
         <p className="flex flex-col md:flex-row justify-center items-center">
-          {`Don't have an account?`}
+          {`Don't have an account? `}
           <Link href="/auth/signup" className="ml-2 text-primary-light">
-            Create Account
+            <span>Create Account</span>
           </Link>
         </p>
       </form>

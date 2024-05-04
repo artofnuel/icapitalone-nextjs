@@ -20,7 +20,7 @@ const DashHome = () => {
             >
               <h2 className="text-base font-bold">Total Deposits</h2>
               <p>$5.00</p>
-              <button className="uppercase bg-background text-secondary p-1 mt-2 w-2/3 rounded-md">
+              <button className="uppercase bg-background text-secondary p-1 px-3 mt-2 rounded-md text-sm">
                 Deposit
               </button>
             </div>
