@@ -42,18 +42,13 @@ const Page = () => {
     }
 
     try {
-      const response = await fetch(
-        // "http://localhost:3020/auth/signup" ||
-        // "http://127.0.0.1:3020/auth/signup",
-        "http://127.0.0.1:3020/auth/signup",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch("http://localhost:3020/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       const responseData = await response.json();
 

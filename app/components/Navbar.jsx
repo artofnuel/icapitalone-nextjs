@@ -20,16 +20,24 @@ const Navbar = () => {
         <div className="hidden w-full md:flex justify-center items-center">
           {pathname === "/dashboard" ? null : <NavLinks />}
         </div>
-        <div className="w-full flex gap-5 justify-end items-center">
+        <div className="w-full flex gap-1 justify-end items-center">
           {pathname === "/dashboard" ? (
             <div className="relative">{/* <HiMenuAlt3 size={25} /> */}</div>
           ) : (
-            <Link
-              href="/auth/signup"
-              className="text-primary font-semibold tracking-wide p-2 border border-primary rounded-md"
-            >
-              Account
-            </Link>
+            <>
+              <Link
+                href="/auth/signup"
+                className="text-primary font-semibold tracking-wide p-2"
+              >
+                Sign Up
+              </Link>
+              <Link
+                href="/auth/login"
+                className="text-primary font-semibold tracking-wide p-2 border border-primary rounded-md"
+              >
+                Log In
+              </Link>
+            </>
           )}
         </div>
       </nav>

@@ -31,7 +31,7 @@ const SideBar = () => {
         <Link
           href="/auth/login"
           className="w-full flex gap-3 p-4 hover:bg-copy-light/20"
-          onClick={handleLogout}
+          // onClick={handleLogout}
         >
           <FiLogOut size={25} />
           <p className="hidden md:block">Logout</p>
