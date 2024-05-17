@@ -39,8 +39,7 @@ const Page = () => {
       formData.name === "" ||
       formData.email === "" ||
       formData.phone === "" ||
-      formData.password === "" ||
-      formData.inputReferralCode === ""
+      formData.password === ""
     ) {
       alert("Please fill in all required fields.");
       setLoading(false);
@@ -65,7 +64,6 @@ const Page = () => {
         console.log("Signup successful!");
         console.log("Response data:", responseData);
         router.push("/dashboard");
-        resetFormData();
       } else {
         console.error("Error during signup:", responseData);
       }
