@@ -1,13 +1,26 @@
-import { Inter, Poppins } from "next/font/google";
+// import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+// ant design
+import React from "react";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 
-const inter = Inter({ subsets: ["latin"] });
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
+import { ConfigProvider, theme } from "antd";
+
+const config = {
+  // Use dark algorithm
+  algorithm: theme.darkAlgorithm,
+  token: {
+    colorPrimary: "#1890ff",
+  },
+};
+
+// const inter = Inter({ subsets: ["latin"] });
+// const poppins = Poppins({
+//   subsets: ["latin"],
+//   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+// });
 
 export const metadata = {
   title: "Create Next App",
@@ -17,10 +30,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+      <body >
+      {/* <body className={poppins.className}> */}
+        {/* <Navbar /> */}
+        <AntdRegistry>{children}</AntdRegistry>
+        {/* <Footer /> */}
       </body>
     </html>
   );

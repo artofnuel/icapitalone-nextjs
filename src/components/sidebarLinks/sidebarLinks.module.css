@@ -1,0 +1,12 @@
+.sidebarLink {
+  align-items: center;
+}
+
+.active {
+  background: #1890ff;
+  color: #fff;
+}
+.sidebarLink.collapsed {
+  justify-content: center;
+  transition:.3s;
+}

@@ -1,10 +1,51 @@
-import SideBar from "./components/SideBar";
+'use client';
+import SideBarLinks from '@/components/sidebarLinks/sidebarLinks';
+import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  UploadOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+} from '@ant-design/icons';
+import { Layout as AntLayout, Menu } from 'antd';
+import Link from 'next/link';
+import React, { useState } from 'react';
 
-export default function Layout({ children }) {
+const { Header, Sider, Content } = AntLayout;
+
+const Layout = ({ children }) => {
+  const [collapsed, setCollapsed] = useState(false);
   return (
-    <main className="w-full min-h-screen flex">
-      <SideBar />
-      <div className="w-full min-h-screen bg-background p-5">{children}</div>
-    </main>
-  );
+    <AntLayout className="layout">
+      <Sider trigger={null} collapsible collapsed={collapsed} className="sidebar">
+        <div className="logo">
+          <h2>iCapitalOne</h2>
+        </div>
+        <SideBarLinks sidebarCollapsed={collapsed} />
+      </Sider>
+      <AntLayout className="site-layout">
+        <Header
+          className="site-layout-background"
+          style={{
+            padding: 0,
+          }}
+        >
+          {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+            className: 'trigger',
+            onClick: () => setCollapsed(!collapsed),
+          })}
+        </Header>
+        <Content
+          className="site-layout-background"
+          style={{
+            margin: '24px 16px',
+            padding: 24,
+          }}
+        >
+          {children}
+        </Content>
+      </AntLayout>
+    </AntLayout>
+  )
 }
+export default Layout;
