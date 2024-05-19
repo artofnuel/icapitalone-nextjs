@@ -36,10 +36,10 @@ const Layout = ({ children }) => {
           })}
         </Header>
         <Content
-          className="site-layout-background"
           style={{
             margin: '24px 16px',
             padding: 24,
+            margin-bottom:'50px'
           }}
         >
           {children}

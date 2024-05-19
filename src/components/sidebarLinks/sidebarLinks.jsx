@@ -71,11 +71,11 @@ export default function SideBarLinks({ sidebarCollapsed }) {
 
     function SidebarLink({ link = { label, path, icon, isActive } }) {
         return <Link
-            className={`${styles.sidebarLink} ${link.isActive && styles.active} ${sidebarCollapsed && styles.collapsed} w-full flex gap-3 p-4 hover:bg-copy-light/20`}
+            className={`${styles.sidebarLink} ${link.isActive && styles.active} ${sidebarCollapsed && styles.collapsed} w-full flex gap-3 p-3 hover:bg-copy-light/20`}
             href={link.path ?? '/'}
         >
             {link.icon}
-            {!sidebarCollapsed && (<p className="hidden md:block">{link.label}</p>)}
+            {!sidebarCollapsed && (<span>{link.label}</span>)}
         </Link>;
     }
 }

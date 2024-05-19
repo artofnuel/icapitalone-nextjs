@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'regular';
+  src: url('./../assets/fonts/NunitoSans/NunitoSans-Regular.ttf');
+}
+*{
+  font-family: 'regular' !important;
+}
+
 .trigger {
     padding: 0 24px;
     font-size: 18px;
