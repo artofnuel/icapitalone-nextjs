@@ -44,7 +44,7 @@ const Page = () => {
 
   return (
     <main className="w-full h-full flex flex-col items-center justify-start gap-5">
-      <section className="w-full h-auto p-5 bg-white rounded-md drop-shadow-md">
+      <section className="w-full h-auto p-2 bg-white rounded-md drop-shadow-md">
         <h1 className="text-xl font-bold text-copy-light">Make payment</h1>
       </section>
 
@@ -58,15 +58,18 @@ const Page = () => {
       </section>
       <section className="w-full h-auto bg-white rounded-md drop-shadow-md card">
         <div className="card-body">
-          <ImageUpload text='Upload Proof' onImageSelected={(image) => handleChange('proof', image)} />
-          {JSON.stringify(payment)}
-          <div className="my-2">
-            <label className="form-label">Amount</label>
-            <input onChange={(event) => handleChange('amount', event.target.value)} value={payment.amount} type="number" className="form-control" />
-          </div>
-          <div className="my-2">
-            <label className="form-label">Payment Method</label>
-            <Select onChange={(value) => handleChange('method', value)} value={payment.method} options={paymentMethods} className="border-0 form-control" />
+          <div className="row align-items-stretch">
+
+            <div className="col-6 my-3">
+              <label className="form-label">Amount</label>
+              <input onChange={(event) => handleChange('amount', event.target.value)} value={payment.amount} type="number" className="form-control" />
+            </div>
+            <div className="col-6 my-3">
+              <label className="form-label">Payment Method</label>
+              <Select onChange={(value) => handleChange('method', value)} value={payment.method} options={paymentMethods} className="border-0 form-control" />
+            </div>
+            <ImageUpload className="my-3" text='Upload Proof' onImageSelected={(image) => handleChange('proof', image)} imageProps={{ width: '100%' }} />
+         
           </div>
           <button className="btn btn-primary mt-2" onClick={submitPayment()}>
             Submit Payment

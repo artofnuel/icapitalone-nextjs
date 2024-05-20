@@ -39,13 +39,13 @@ const Layout = ({ children }) => {
           style={{
             margin: '24px 16px',
             padding: 24,
-            margin-bottom:'50px'
+            marginBottom:'50px'
           }}
         >
-          {children}
-        </Content>
-      </AntLayout>
+        {children}
+      </Content>
     </AntLayout>
+    </AntLayout >
   )
 }
 export default Layout;

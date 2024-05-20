@@ -3,47 +3,55 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'regular';
-  src: url('./../assets/fonts/NunitoSans/NunitoSans-Regular.ttf');
+  font-family: "regular";
+  src: url("./../assets/fonts/NunitoSans/NunitoSans-Light.ttf");
 }
-*{
-  font-family: 'regular' !important;
+* {
+  font-family: "regular" !important;
 }
 
 .trigger {
-    padding: 0 24px;
-    font-size: 18px;
-    line-height: 64px;
-    cursor: pointer;
-    transition: color 0.3s;
-  }
-  
-   .trigger:hover {
-    color: #1890ff;
-  }
-  
-   .logo {
-    height: 32px;
-    margin: 16px;
-    background: rgba(255, 255, 255, 0.3);
-    color: #fff;
-    align-items: center;
-    justify-content:center;
-    display:flex;
-  }
-  
-  .site-layout{
-    overflow: hidden auto;
-  }
-  .site-layout .site-layout-background {
-    background: #fff;
-  }
-  
-  .layout {
-    height: 100vh;
-  }
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
 
-  .sidebar{
-    overflow: hidden auto;
-    height: 100vh;
-  }
+.trigger:hover {
+  color: #1890ff;
+}
+
+.logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.site-layout {
+  overflow: hidden auto;
+}
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+.layout {
+  height: 100vh;
+}
+
+.sidebar {
+  overflow: hidden auto;
+  height: 100vh;
+}
+
+/* OVERRIDE ANT DESIGN */
+.ant-image {
+  border-radius: 10px;
+  object-fit: cover;
+  height: 100% !important;
+  width: 100% !important;
+}
