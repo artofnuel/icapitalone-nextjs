@@ -18,8 +18,8 @@ const Layout = ({ children }) => {
   return (
     <AntLayout className="layout">
       <Sider trigger={null} collapsible collapsed={collapsed} className="sidebar">
-        <div className="logo">
-          <h2>iCapitalOne</h2>
+        <div className="logo p-2">
+          {collapsed ? 'ICO' : 'iCapitalOne'}
         </div>
         <SideBarLinks sidebarCollapsed={collapsed} />
       </Sider>
@@ -39,12 +39,13 @@ const Layout = ({ children }) => {
           style={{
             margin: '24px 16px',
             padding: 24,
-            marginBottom:'50px'
+            'padding-bottom': '50px'
           }}
         >
-        {children}
-      </Content>
-    </AntLayout>
+          {children}
+          <div className="my-5"></div>
+        </Content>
+      </AntLayout>
     </AntLayout >
   )
 }
