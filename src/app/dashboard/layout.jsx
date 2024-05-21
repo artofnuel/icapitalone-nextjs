@@ -1,5 +1,6 @@
 'use client';
 import SideBarLinks from '@/components/sidebarLinks/sidebarLinks';
+import Avatar from '@/components/Avatar/Avatar';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -10,6 +11,7 @@ import {
 import { Layout as AntLayout, Menu } from 'antd';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { FiList, FiLogOut } from "react-icons/fi";
 
 const { Header, Sider, Content } = AntLayout;
 
@@ -18,14 +20,22 @@ const Layout = ({ children }) => {
   return (
     <AntLayout className="layout">
       <Sider trigger={null} collapsible collapsed={collapsed} className="sidebar">
-        <div className="logo p-2">
+        <div className="logo p-2 mb-2">
           {collapsed ? 'ICO' : 'iCapitalOne'}
+        </div>
+        <div className="my-4 d-flex gap-2 flex-column justify-content-center align-items-center">
+          <Avatar alt="John" src="https://" />
+          <p className="text-light fw-bold">John D.</p>
+          <div className="d-flex gap-3 justify-content-center align-items-center">
+            <FiLogOut size={15} className="text-light" />
+            <i className="flaticon flaticon-setting text-light"></i>
+          </div>
         </div>
         <SideBarLinks sidebarCollapsed={collapsed} />
       </Sider>
       <AntLayout className="site-layout">
         <Header
-          className="site-layout-background"
+          className="site-layout-background d-flex"
           style={{
             padding: 0,
           }}
@@ -34,6 +44,9 @@ const Layout = ({ children }) => {
             className: 'trigger',
             onClick: () => setCollapsed(!collapsed),
           })}
+          <div className="w-100 d-flex justify-content-end p-2">
+            <Avatar size={90} alt="John" src="https://" className="border-dark text-dark" color="#000" />
+          </div>
         </Header>
         <Content
           style={{
