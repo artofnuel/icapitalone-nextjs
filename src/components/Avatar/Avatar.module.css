@@ -1,0 +1,24 @@
+.avatar {
+  --color: #fff;
+  width: 80px;
+  height: 80px;
+  position: relative;
+  overflow: hidden;
+}
+.avatar::after {
+  content: "J";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  color: var(--color);
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color);
+  border-radius: inherit;
+}

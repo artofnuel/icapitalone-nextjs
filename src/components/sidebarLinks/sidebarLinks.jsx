@@ -18,7 +18,7 @@ export default function SideBarLinks({ sidebarCollapsed }) {
         {
             path: "/dashboard",
             icon: <CgHomeAlt size={25} className="p-1 bg-white/10 rounded-full" />,
-            label: 'Dashboard'
+            label: 'Dashboard',
         },
         {
             path: "/dashboard/account",

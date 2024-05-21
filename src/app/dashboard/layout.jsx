@@ -24,13 +24,20 @@ const Layout = ({ children }) => {
           {collapsed ? 'ICO' : 'iCapitalOne'}
         </div>
         <div className="my-4 d-flex gap-2 flex-column justify-content-center align-items-center">
-          <Avatar alt="John" src="https://" />
-          <p className="text-light fw-bold">John D.</p>
-          <div className="d-flex gap-3 justify-content-center align-items-center">
-            <FiLogOut size={15} className="text-light" />
-            <i className="flaticon flaticon-setting text-light"></i>
-          </div>
+          <Avatar alt="John" src="https://" size={collapsed ? 100 : 160} />
+          {!collapsed &&
+            (
+              <>
+                <p className="text-light fw-bold">John D.</p>
+                <div className="d-flex gap-3 justify-content-center align-items-center">
+                  <FiLogOut size={15} className="text-light" />
+                  <i className="flaticon flaticon-setting text-light"></i>
+                </div>
+              </>
+            )
+          }
         </div>
+        <hr className="w-100"></hr>
         <SideBarLinks sidebarCollapsed={collapsed} />
       </Sider>
       <AntLayout className="site-layout">
@@ -45,14 +52,14 @@ const Layout = ({ children }) => {
             onClick: () => setCollapsed(!collapsed),
           })}
           <div className="w-100 d-flex justify-content-end p-2">
-            <Avatar size={90} alt="John" src="https://" className="border-dark text-dark" color="#000" />
+            <Avatar size={90} alt="John" src="https://" className="border-0 bg-dark" />
           </div>
         </Header>
         <Content
           style={{
             margin: '24px 16px',
             padding: 24,
-            'padding-bottom': '50px'
+            paddingBottom: '50px'
           }}
         >
           {children}

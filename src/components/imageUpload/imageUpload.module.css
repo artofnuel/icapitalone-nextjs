@@ -1,0 +1,31 @@
+.imageUpload {
+  border-radius: 10px;
+  overflow: hidden;
+}
+.imageUpload .uploadBtn,
+.imageUpload .imagePreview {
+  position: relative;
+}
+.imageUpload input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.imageUpload .imagePreview {
+  object-fit: cover;
+}
+.delete {
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  color: #fff;
+  right: 18px;
+  color: #fff;
+  background: red;
+  padding: 10px;
+}

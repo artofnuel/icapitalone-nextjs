@@ -55,8 +55,7 @@ const LoginPage = () => {
 
   return (
     <main className="w-full min-h-screen bg-white flex flex-col justify-center items-center">
-      <form
-        onSubmit={handleSubmit}
+      <div
         className="w-full p-5 bg-white rounded-md flex flex-col justify-center items-center gap-4"
       >
         <div className="w-10/12 h-auto mx-auto relative flex justify-center items-center">
@@ -106,11 +105,11 @@ const LoginPage = () => {
         </button>
         <p className="flex flex-col md:flex-row justify-center items-center">
           {`Don't have an account? `}
-          <Link href="/auth/signup" className="ml-2 text-primary-light">
+          <Link href="/signup" className="ml-2 text-primary-light">
             <span>Create Account</span>
           </Link>
         </p>
-      </form>
+      </div>
     </main>
   );
 };
