@@ -1,11 +1,8 @@
-import { create } from "zustand";
+import { configureStore } from '@reduxjs/toolkit';
+import userReducer from './userSlice';
 
-const useStore = create((set) => ({
-    user:null,
-    isAuthenticated:false,
-    setUser:(user) => set({user, isAuthenticated: !!user}),
-    logout: () => set({user:null, isAuthenticated: false})
-}));
-
-
-export default useStore;
+export const store = configureStore({
+  reducer: {
+    user: userReducer,
+  },
+});

@@ -9,52 +9,17 @@ import { InfinitySpin } from "react-loader-spinner";
 
 const LoginPage = () => {
   const router = useRouter();
-  const [userEmail, setUserEmail] = useState("");
-  const [userPassword, setUserPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      const response = await fetch(
-        "https://icapitalone.up.railway.app/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: userEmail, password: userPassword }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to authenticate");
-      }
-
-      const responseData = await response.json();
-
-      // Assuming the response contains a success flag and user data
-      if (responseData.success) {
-        console.log("Login successful!");
-        setLoading(false);
-        // Redirect to dashboard on successful login
-        router.push("/dashboard");
-      } else {
-        setLoading(false);
-        console.error("Error during login:", responseData.error);
-        alert("Login failed. Please check your email and password.");
-      }
-    } catch (error) {
-      setLoading(false);
-      console.error("Error during login:", error.message);
-      alert("Login failed. Please try again later.");
-    }
-  };
-
+  const [authData, setAuthData] = useState({
+    email: null,
+    password: null
+  });
+  const handleChange = (name, value) => {
+    setAuthData({ ...authData, [name]: value })
+  }
   return (
-    <main className="w-full min-h-screen bg-white flex flex-col justify-center items-center">
+    <div className="w-full min-h-screen bg-white flex flex-col justify-center items-center">
       <div
         className="w-full p-5 bg-white rounded-md flex flex-col justify-center items-center gap-4"
       >
@@ -65,8 +30,8 @@ const LoginPage = () => {
           <input
             type="email"
             name="email"
-            value={userEmail}
-            onChange={(e) => setUserEmail(e.target.value)}
+            value={authData.email}
+            onChange={(e) => handleChange("email", e.target.value)}
             placeholder="Email Address"
             className="w-full h-auto p-3 border border-border rounded-md"
           />
@@ -79,15 +44,15 @@ const LoginPage = () => {
           <input
             type="password"
             name="password"
-            value={userPassword}
-            onChange={(e) => setUserPassword(e.target.value)}
+            value={authData.password}
+            onChange={(e) => handleChange("password", e.target.value)}
             placeholder="Password"
             className="w-full h-auto p-3 border border-border rounded-md"
           />
         </div>
         <button
           type="submit"
-          className={`w-10/12 h-12 bg-primary-light flex flex-col justify-center items-center rounded-md text-white`}
+          className="btn btn-primary w-10/12 p-3"
           disabled={loading} // Disable button when loading
         >
           {loading ? (
@@ -110,7 +75,7 @@ const LoginPage = () => {
           </Link>
         </p>
       </div>
-    </main>
+    </div>
   );
 };
 

@@ -11,6 +11,8 @@ import React from "react";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 import { ConfigProvider, theme } from "antd";
+import { Provider } from 'react-redux';
+import { store } from '@/store';
 
 const config = {
   // Use dark algorithm
@@ -36,10 +38,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         {/* <body className={poppins.className}> */}
-        {/* <Navbar /> */}
+        <Provider store={store}>
         <AntdRegistry>{children}</AntdRegistry>
-        {/* <Footer /> */}
+        </Provider>
       </body>
     </html>
   );
 }
+

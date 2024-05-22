@@ -6,10 +6,10 @@ import ImageUpload from "@/components/imageUpload/imageUpload";
 
 const Page = () => {
   const paymentMethods = [
-    { label: "Bank Transfer", value: "Bank Transfer" },
-    { label: "Ethereum", value: "Ethereum" },
-    { label: "Bitcoin", value: "Bitcoin" },
-    { label: "Credit Card", value: "Credit Card" },
+    { value: "Bank Transfer" },
+    { value: "Ethereum" },
+    { value: "Bitcoin" },
+    { value: "Credit Card" },
   ];
   const depositMethods = [
     {
@@ -69,7 +69,7 @@ const Page = () => {
               <Select onChange={(value) => handleChange('method', value)} value={payment.method} options={paymentMethods} className="border-0 form-control" />
             </div>
             <ImageUpload className="my-3" text='Upload Proof' onImageSelected={(image) => handleChange('proof', image)} imageProps={{ width: '100%' }} />
-         
+
           </div>
           <button className="btn btn-primary mt-2" onClick={submitPayment()}>
             Submit Payment
