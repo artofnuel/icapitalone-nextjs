@@ -1,7 +1,7 @@
 import React from "react";
 import DashHome from "./components/DashHome";
 
-const page = () => {
+const Page = () => {
   return (
     <div className="w-full min-h-screen flex">
       <DashHome />
@@ -9,4 +9,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
