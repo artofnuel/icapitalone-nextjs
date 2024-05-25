@@ -3,8 +3,17 @@ import PaymentCard from "@/components/paymentCard/paymentCard";
 import React, { useState } from "react";
 import { Select } from "antd";
 import ImageUpload from "@/components/imageUpload/imageUpload";
+import { useDepositStore } from "@/store/finance/depositStore";
+import { type Deposit } from "@/interfaces";
+import { useRouter } from "next/navigation";
 
-const Page = () => {
+export default function () {
+  // stores
+  const { makePayment } = useDepositStore();
+
+  // hooks
+  const router = useRouter();
+
   const paymentMethods = [
     { value: "Bank Transfer" },
     { value: "Ethereum" },
@@ -28,18 +37,22 @@ const Page = () => {
     }
   ];
 
-  const [payment, setPayment] = useState({
-    method: null,
-    amount: null,
-    proof: null,
+  const [payment, setPayment] = useState<Deposit>({
+    paymentMethod: '',
+    amount: 0,
+    receipt: null,
   });
-  const handleChange = (name, value) => {
+  const handleChange = (name: string, value: any) => {
     setPayment({
       ...payment, [name]: value
     });
   }
   function submitPayment() {
-
+    makePayment(payment).then((response) => {
+      if (response) {
+        router.push("/dashboard/deposits");
+      }
+    })
   }
 
   return (
@@ -66,9 +79,9 @@ const Page = () => {
             </div>
             <div className="col-6 my-3">
               <label className="form-label">Payment Method</label>
-              <Select onChange={(value) => handleChange('method', value)} value={payment.method} options={paymentMethods} className="border-0 form-control" />
+              <Select onChange={(value) => handleChange('paymentMethod', value)} value={payment.paymentMethod} options={paymentMethods} className="border-0 form-control" />
             </div>
-            <ImageUpload className="my-3" text='Upload Proof' onImageSelected={(image) => handleChange('proof', image)} imageProps={{ width: '100%' }} />
+            <ImageUpload className="my-3" text='Upload Proof' onImageSelected={(image: File) => handleChange('proof', image)} imageProps={{ width: '100%' }} />
 
           </div>
           <button className="btn btn-primary mt-2" onClick={submitPayment()}>
@@ -78,6 +91,4 @@ const Page = () => {
       </section>
     </main>
   );
-};
-
-export default Page;
+}

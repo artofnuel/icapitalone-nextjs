@@ -13,11 +13,15 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { FiList, FiLogOut } from "react-icons/fi";
 import withAuth from '@/middleware/withAuth';
+import { useAccountStore } from '@/store/accountStore';
 
 const { Header, Sider, Content } = AntLayout;
 
 const Layout = ({ children }: { children: any; }) => {
   const [collapsed, setCollapsed] = useState(false);
+  // stores
+  const { user, logout } = useAccountStore();
+
   return (
     <AntLayout className="layout">
       <Sider trigger={null} collapsible collapsed={collapsed} className="sidebar">
@@ -25,13 +29,13 @@ const Layout = ({ children }: { children: any; }) => {
           {collapsed ? 'ICO' : 'iCapitalOne'}
         </div>
         <div className="my-4 d-flex gap-2 flex-column justify-content-center align-items-center">
-          <Avatar alt="John" src="https://" size={collapsed ? 100 : 160} />
+          <Avatar alt={user?.name} src="https://" size={collapsed ? 100 : 160} />
           {!collapsed &&
             (
               <>
-                <p className="text-light fw-bold">John D.</p>
+                <p className="text-light fw-bold">{user?.name}</p>
                 <div className="d-flex gap-3 justify-content-center align-items-center">
-                  <FiLogOut size={15} className="text-light" />
+                  <FiLogOut size={15} className="text-light" onClick={logout} />
                   <i className="flaticon flaticon-setting text-light"></i>
                 </div>
               </>
@@ -53,7 +57,7 @@ const Layout = ({ children }: { children: any; }) => {
             onClick: () => setCollapsed(!collapsed),
           })}
           <div className="w-100 d-flex justify-content-end p-2">
-            <Avatar size={90} alt="John" src="https://" className="border-0 bg-dark" />
+            <Avatar size={90} alt={user?.name} src="https://" className="border-0 bg-dark" />
           </div>
         </Header>
         <Content

@@ -2,6 +2,7 @@
 "use client";
 // import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
+import "@/assets/css/animations.css";
 import "@/assets/bootstrap/css/bootstrap.min.css";
 import "@/assets/icons/flaticon/flaticon.css";
 import React, { ReactNode, useEffect } from "react";
@@ -38,9 +39,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
   const { user, fetchProfile } = useAccountStore();
 
   useEffect(() => {
-      if (!user) {
-          fetchProfile();
-      }
+    if (!user) {
+      fetchProfile();
+    }
   }, [user, fetchProfile]);
 
   useEffect(() => {
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       checkAuth();
     }
   }, [checkAuth]);
+  
   return (
     <html lang="en">
       <body>

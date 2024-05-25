@@ -14,8 +14,11 @@ const withAuth = (WrappedComponent: any) => {
 
     useEffect(() => {
       if (typeof window !== 'undefined') {
-        checkAuth();
-        if (!isAuthenticated) {
+        // checkAuth();
+        let token = localStorage.getItem("_token");
+        const isAuth = !!token
+        if (!isAuth) {
+          alert("no logged in")
           router.push("/login");
         }
       }

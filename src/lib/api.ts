@@ -11,13 +11,13 @@ const api = axios.create({
 
 // Methods
 function getAuthorizationHeader(): string | null {
-  return localStorage.getItem("access");
+  return `Bearer ${localStorage.getItem("_token")}`;
 }
 
 function handleError(error: AxiosError): void {
   const { config, response } = error;
 
-  toast.error(response?.data?.message ?? "Unable to Process Request");
+  toast.error(response?.data?.message ?? "Network error. Please check your connection and try again");
   console.error("Error:", response?.status, response?.data);
 }
 

@@ -1,22 +1,26 @@
 "use client";
-import useFormStore from "@/app/store/useFormStore";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./styles.module.css";
+import { useAccountStore } from "@/store/accountStore";
 
 const DashHome = () => {
-  // const userName = useFormStore((state) => state.formData.name);
-  const { name, authUserEmail } = useFormStore();
+  // stores
+  const { user, fetchWalletBalance } = useAccountStore();
+
+  useEffect(() => {
+    fetchWalletBalance();
+  }, [fetchWalletBalance]);
 
   return (
     <main className="w-full h-full flex flex-col items-center justify-start gap-5">
       <section className="w-full h-auto p-3 bg-white rounded-md drop-shadow-md">
         <h1 className="text-xl font-bold text-copy-light">
-          Welcome, {authUserEmail || name}!
+          Welcome, {user?.name}!
         </h1>
       </section>
       <section className="w-full h-auto md:h-[500px] bg-white p-5 flex justify-center items-center gap-5 rounded-md drop-shadow-md">
         <div className="w-full h-full grid grid-cols-2 md:grid-cols-4 gap-5">
-          {[1, 2, 3, 4, 5, 6].map((item, index) => (
+          {[1].map((item, index) => (
             <div
               key={index}
               style={{
@@ -25,7 +29,7 @@ const DashHome = () => {
               className={`w-full h-[150px] md:h-full drop-shadow-xl rounded-md p-3 flex flex-col gap-2 border-1 border-primary ${styles.dashboardInfoCard}`}
             >
               <h2 className="text-base font-bold">Total Deposits</h2>
-              <p>$5.00</p>
+              <p>${user?.balance}</p>
               <button className="uppercase btn btn-sm btn-primary">
                 Deposit
               </button>

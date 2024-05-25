@@ -1,10 +1,13 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "antd";
 import { FaPlus } from "react-icons/fa";
+import { useDepositStore } from "@/store/finance/depositStore";
 
 const page = () => {
+  // stores
+  const { fetchDeposits, deposits } = useDepositStore();
   const transactions = [
     {
       id: 1,
@@ -51,6 +54,10 @@ const page = () => {
       dataIndex: 'dateCreated'
     }
   ];
+
+  useEffect(() => {
+    fetchDeposits();
+  })
   return (
     <main className="w-full h-full flex flex-col items-center justify-start gap-5">
       <section className="w-full h-auto p-3 bg-white rounded-md drop-shadow-md">
@@ -65,8 +72,8 @@ const page = () => {
           <FaPlus /> Make a payment
         </Link>
 
-        <Table className="w-100" columns={columns} dataSource={transactions}></Table>
-       
+        <Table className="w-100" columns={columns} dataSource={deposits}></Table>
+
       </section>
     </main>
   );

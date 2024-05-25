@@ -3,8 +3,22 @@ interface User {
   name: string;
   email: string;
   phone?: string;
-  password?: string;
+  password: string | null;
   investmetyType?: string;
+  balance?: string;
   [key: string]: any;
 }
-export type { User }
+
+
+// Define the types for the user and the store state
+interface Deposit {
+    id?: string;
+    amount: Number;
+    paymentMethod?: string;
+    userId?: string;
+    receipt?: File|null;
+    date?: string;
+    type?: string;
+}
+
+export type { User, Deposit } 
