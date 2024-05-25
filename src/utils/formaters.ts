@@ -2,7 +2,7 @@ function formatAmount(amount: any, addSign: Boolean = true) {
     return `${addSign && '₦'}${Number.parseInt(amount).toLocaleString("en-US")}`;
 }
 
-function formatDate(rawDate: string) {
+function formatDate(rawDate?: string) {
     const date = new Date(rawDate);
     const options: Intl.DateTimeFormatOptions = {
         weekday: 'long',

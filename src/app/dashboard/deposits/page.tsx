@@ -30,7 +30,7 @@ const page = () => {
     },
     {
       title: 'Date Created',
-      render: (_: any, record: { paymentDate: string; }, index: any) => formatDate(record.paymentDate),
+      render: (_: any, record: Deposit, index: any) => formatDate(record.paymentDate),
     }
   ];
 
