@@ -128,7 +128,6 @@ const Page = () => {
             <FaLock />
           </i>
           <input
-            required
             type="text"
             name="inputReferralCode"
             value={userData.inputReferralCode}

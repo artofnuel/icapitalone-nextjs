@@ -8,70 +8,101 @@ import { useMainStore } from ".";
 interface AccountStoreState {
     user: User | null;
     register: (user: User) => Promise<Boolean>;
-    login: (credentials: { email: string; password: string }) => Promise<Boolean>;
+    login: (credentials: { email: string; password: string | null }) => Promise<Boolean>;
     setUser: (user: User | null) => void;
     logout: () => void;
     fetchProfile: () => Promise<void>;
-    forgotPassword: () => Promise<void>;
-    resetPassword: () => Promise<void>;
+    fetchWalletBalance: () => Promise<void>;
+    sendResetCode: (email: string) => Promise<Boolean>;
+    verifyResetCode: (code: string) => Promise<Boolean>;
+    resetPassword: (enail: string, password: string) => Promise<Boolean>;
 }
 
 export const useAccountStore = create<AccountStoreState>((set) => ({
     user: null,
     setUser: (user) => set({ user }),
 
-    logout: () => set({ user: null }),
+    logout: () => set((state) => {
+        localStorage.clear();
+        useMainStore.getState().checkAuth();
+        return { ...state, user: null }
+    }),
     register: async (user) => {
         try {
-            const response = await api.post("auth/signup", user);
-            set({ user: response.data.data });
+            await api.post("auth/signup", user);
+            toast.success("Account Created Successfully");
+            await useAccountStore.getState().login({ email: user.email, password: user.password })
             return true;
         } catch (error) {
             console.error("Register failed", error);
-            // Handle login error appropriately
             return false;
         }
     },
     login: async ({ email, password }) => {
         try {
             const response = await api.post("auth/login", { email, password });
-            set({ user: response.data.data });
-            localStorage.setItem('token', response.data.data.token);
+            const data = response.data.data;
+            set({ user: data });
+            useMainStore.getState().setAuthData(data.token, data._id);
             toast.success("User Logged In Successfully");
             return true;
         } catch (error) {
             console.error("Login failed", error);
-            // Handle login error appropriately
             return false
         }
     },
     fetchProfile: async () => {
         try {
+            useMainStore.getState().checkAuth();
             if (useMainStore.getState().isAuthenticated) {
-                const response = await api.get(`users/profile/${useAccountStore.getState().user?.id}`);
+                const response = await api.get(`users/profile/${useMainStore.getState().id}`);
                 set({ user: response.data.data });
             }
         } catch (error) {
             console.error("Login failed", error);
-            // Handle login error appropriately
         }
     },
-    forgotPassword: async () => {
+    fetchWalletBalance: async () => {
         try {
-            const response = await api.get("auth/login");
-            set({ user: response.data.data });
+            useMainStore.getState().checkAuth();
+            if (useMainStore.getState().isAuthenticated) {
+                const response = await api.get(`users/wallet/${useMainStore.getState().id}`);
+                set({ user: { ...useAccountStore.getState().user, balance: response.data.data } })
+            }
         } catch (error) {
             console.error("Login failed", error);
-            // Handle login error appropriately
         }
     },
-    resetPassword: async () => {
+    sendResetCode: async (email) => {
         try {
-            const response = await api.get("auth/login");
-            set({ user: response.data.data });
+            await api.post("auth/forgot-password", { email });
+            return true;
+        } catch (error) {
+            // console.error("Login failed", error);
+            return false;
+        }
+    },
+    verifyResetCode: async (code) => {
+        try {
+            await api.post("auth/verify-reset-code", {
+                verificationCode: code
+            });
+            return true;
+        } catch (error) {
+            // console.error("Login failed", error);
+            return false;
+        }
+    },
+    resetPassword: async (email, password) => {
+        try {
+            await api.patch("auth/change-password", {
+                email, newPassword: password
+            });
+            toast.success("Password Changed Successfully");
+            return true;
         } catch (error) {
             console.error("Login failed", error);
-            // Handle login error appropriately
+            return false;
         }
     },
 }));

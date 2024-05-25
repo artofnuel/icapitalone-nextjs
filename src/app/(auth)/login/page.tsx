@@ -55,6 +55,7 @@ export default function LoginPage() {
             <MdEmail />
           </i>
           <input
+          required
             type="email"
             name="email"
             value={credential.email}
@@ -69,6 +70,7 @@ export default function LoginPage() {
             <FaLock />
           </i>
           <input
+          required
             type="password"
             name="password"
             value={credential.password}
@@ -77,14 +79,23 @@ export default function LoginPage() {
             className="w-full h-auto p-3 border border-border rounded-md"
           />
         </div>
-        <button
-          type="submit"
-          id="login"
-          className="btn btn-primary w-10/12 p-3"
-          onClick={loginUser}
-        >
-          Login
-        </button>
+
+        <div className="w-10/12 h-auto mx-auto">
+          <div className="d-flex justify-content-end mb-0 w-100">
+            <Link href="/forgot-password" className="ml-2 text-primary-light mb-1">
+              <span>Forgot Password</span>
+            </Link>
+          </div>
+          <button
+            type="submit"
+            id="login"
+            className=" d-block btn btn-primary w-100 p-3"
+            onClick={loginUser}
+          >
+            Login
+          </button>
+        </div>
+
         <p className="flex flex-col md:flex-row justify-center items-center">
           {`Don't have an account? `}
           <Link href="/signup" className="ml-2 text-primary-light">
