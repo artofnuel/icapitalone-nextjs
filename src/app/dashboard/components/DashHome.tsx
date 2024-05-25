@@ -2,14 +2,15 @@
 import React, { useEffect } from "react";
 import styles from "./styles.module.css";
 import { useAccountStore } from "@/store/accountStore";
+import Link from "next/link";
 
 const DashHome = () => {
   // stores
-  const { user, fetchWalletBalance } = useAccountStore();
+  const { user, wallet, fetchWalletBalance } = useAccountStore();
 
   useEffect(() => {
     fetchWalletBalance();
-  }, [fetchWalletBalance]);
+  }, []);
 
   return (
     <main className="w-full h-full flex flex-col items-center justify-start gap-5">
@@ -29,10 +30,10 @@ const DashHome = () => {
               className={`w-full h-[150px] md:h-full drop-shadow-xl rounded-md p-3 flex flex-col gap-2 border-1 border-primary ${styles.dashboardInfoCard}`}
             >
               <h2 className="text-base font-bold">Total Deposits</h2>
-              <p>${user?.balance}</p>
-              <button className="uppercase btn btn-sm btn-primary">
+              <p>${wallet?.balance}</p>
+              <Link href="/dashboard/deposit/payment" className="uppercase btn btn-sm btn-primary">
                 Deposit
-              </button>
+              </Link>
             </div>
           ))}
           {/* <div className="w-full h-[150px] md:h-full drop-shadow-xl col-span-2 rounded-md bg-secondary"></div> */}

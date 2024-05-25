@@ -1,5 +1,5 @@
 import api from "@/lib/api";
-import { type User } from "@/interfaces";
+import { type User ,type Wallet} from "@/interfaces";
 import { create } from "zustand";
 import { toast } from 'react-toastify';
 import { useMainStore } from ".";
@@ -7,6 +7,7 @@ import { useMainStore } from ".";
 
 interface AccountStoreState {
     user: User | null;
+    wallet: Wallet | null;
     register: (user: User) => Promise<Boolean>;
     login: (credentials: { email: string; password: string | null }) => Promise<Boolean>;
     setUser: (user: User | null) => void;
@@ -19,6 +20,7 @@ interface AccountStoreState {
 }
 
 export const useAccountStore = create<AccountStoreState>((set) => ({
+    wallet: null,
     user: null,
     setUser: (user) => set({ user }),
 
@@ -42,7 +44,7 @@ export const useAccountStore = create<AccountStoreState>((set) => ({
         try {
             const response = await api.post("auth/login", { email, password });
             const data = response.data.data;
-            set({ user: data });
+            set({ user: {...data, id: data._id} });
             useMainStore.getState().setAuthData(data.token, data._id);
             toast.success("User Logged In Successfully");
             return true;
@@ -66,8 +68,18 @@ export const useAccountStore = create<AccountStoreState>((set) => ({
         try {
             useMainStore.getState().checkAuth();
             if (useMainStore.getState().isAuthenticated) {
-                const response = await api.get(`users/wallet/${useMainStore.getState().id}`);
-                set({ user: { ...useAccountStore.getState().user, balance: response.data.data } })
+                const response = await api.get('deposit/balance', {
+                    params:{
+                        _id:useMainStore.getState().id
+                    }
+                    }
+                );
+                const data: Object<string, any> = response.data.data;
+                set({ ...useAccountStore.getState(),wallet:{
+                    id:data._id,
+                    walletId:data.walletId,
+                    balance:data.balance
+                } })
             }
         } catch (error) {
             console.error("Login failed", error);

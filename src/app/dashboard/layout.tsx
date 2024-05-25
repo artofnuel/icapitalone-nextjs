@@ -29,7 +29,7 @@ const Layout = ({ children }: { children: any; }) => {
           {collapsed ? 'ICO' : 'iCapitalOne'}
         </div>
         <div className="my-4 d-flex gap-2 flex-column justify-content-center align-items-center">
-          <Avatar alt={user?.name} src="https://" size={collapsed ? 100 : 160} />
+          <Avatar alt={user?.name} src={user?.profile} size={collapsed ? 100 : 160} />
           {!collapsed &&
             (
               <>
@@ -57,7 +57,7 @@ const Layout = ({ children }: { children: any; }) => {
             onClick: () => setCollapsed(!collapsed),
           })}
           <div className="w-100 d-flex justify-content-end p-2">
-            <Avatar size={90} alt={user?.name} src="https://" className="border-0 bg-dark" />
+            <Avatar size={90} alt={user?.name} src={user?.profile} className="border-0 bg-dark" />
           </div>
         </Header>
         <Content

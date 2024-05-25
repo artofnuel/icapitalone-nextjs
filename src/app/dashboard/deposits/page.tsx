@@ -4,60 +4,39 @@ import React, { useEffect } from "react";
 import { Table } from "antd";
 import { FaPlus } from "react-icons/fa";
 import { useDepositStore } from "@/store/finance/depositStore";
-
+import { formatAmount, formatDate } from "@/utils/formaters"
+import { Deposit } from "@/interfaces";
+import { ColumnsType } from "antd/es/table";
 const page = () => {
   // stores
   const { fetchDeposits, deposits } = useDepositStore();
-  const transactions = [
+
+  const columns: ColumnsType<Deposit> = [
     {
-      id: 1,
-      amount: 100,
-      payment: "Credit",
-      status: "Success",
-      dateCreated: "2024-05-13",
-    },
-    {
-      id: 2,
-      amount: 50,
-      payment: "Debit",
-      status: "Success",
-      dateCreated: "2024-05-12",
-    },
-    {
-      id: 3,
-      amount: 30,
-      payment: "Credit",
-      status: "Success",
-      dateCreated: "2024-05-11",
-    },
-    // Add more dummy data as needed
-  ];
-  const columns = [
-    {
-      title: 'ID',
-      dataIndex: 'id'
+      title: 'S/N',
+      render: (_: any, record: any, index: number) => index + 1,
     },
     {
       title: 'Amount',
-      dataIndex: 'amount'
+      render: (_: any, record: { amount: any; }, index: any) => formatAmount(record.amount),
     },
     {
-      title: 'Type',
-      dataIndex: 'payment'
+      title: 'Method',
+      dataIndex: 'paymentMethod'
     },
     {
-      title: 'Statue',
+      title: 'Status',
       dataIndex: 'status'
     },
     {
       title: 'Date Created',
-      dataIndex: 'dateCreated'
+      render: (_: any, record: { paymentDate: string; }, index: any) => formatDate(record.paymentDate),
     }
   ];
 
   useEffect(() => {
     fetchDeposits();
-  })
+  }, [])
   return (
     <main className="w-full h-full flex flex-col items-center justify-start gap-5">
       <section className="w-full h-auto p-3 bg-white rounded-md drop-shadow-md">

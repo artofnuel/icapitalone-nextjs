@@ -42,7 +42,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     if (!user) {
       fetchProfile();
     }
-  }, [user, fetchProfile]);
+  }, [user]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

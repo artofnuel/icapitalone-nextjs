@@ -21,7 +21,6 @@ function validateForm(callbackElementId: string): { [key: string]: string } {
       callbackElement.toggleAttribute("disabled", Object.keys(errors).length > 0);
     }
   }
-  console.log(errors);
   return errors;
 }
 

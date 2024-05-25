@@ -6,9 +6,11 @@ import ImageUpload from "@/components/imageUpload/imageUpload";
 import { useDepositStore } from "@/store/finance/depositStore";
 import { type Deposit } from "@/interfaces";
 import { useRouter } from "next/navigation";
+import { useAccountStore } from "@/store/accountStore";
 
 export default function () {
   // stores
+  const { user } = useAccountStore();
   const { makePayment } = useDepositStore();
 
   // hooks
@@ -41,13 +43,15 @@ export default function () {
     paymentMethod: '',
     amount: 0,
     receipt: null,
+    userId: user?.id
   });
   const handleChange = (name: string, value: any) => {
     setPayment({
       ...payment, [name]: value
     });
   }
-  function submitPayment() {
+  const submitPayment = () => {
+    console.log(user)
     makePayment(payment).then((response) => {
       if (response) {
         router.push("/dashboard/deposits");
@@ -81,10 +85,10 @@ export default function () {
               <label className="form-label">Payment Method</label>
               <Select onChange={(value) => handleChange('paymentMethod', value)} value={payment.paymentMethod} options={paymentMethods} className="border-0 form-control" />
             </div>
-            <ImageUpload className="my-3" text='Upload Proof' onImageSelected={(image: File) => handleChange('proof', image)} imageProps={{ width: '100%' }} />
+            <ImageUpload className="my-3" text='Upload Proof' onImageSelected={(image: File) => handleChange('receipt', image)} imageProps={{ width: '100%' }} />
 
           </div>
-          <button className="btn btn-primary mt-2" onClick={submitPayment()}>
+          <button className="btn btn-primary mt-2" onClick={submitPayment}>
             Submit Payment
           </button>
         </div>
